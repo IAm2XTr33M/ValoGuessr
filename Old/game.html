@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="js\myscripts.js"></script>
+    <title>ValoGuessr</title>
+</head>
+<body style="margin: 0; overflow-y: hidden;">
+
+<div class="header">
+    <a href="index.html" class="headerLogo">
+        <img src="/img/ValoGuessrLogo.png" style="height: 100%;">
+    </a>
+</div>
+
+<div class="mainDiv">
+
+    <h1 id="errorText" style="display: none;" class="leela"> 
+        I'm sorry but we seem to have crashed, please try again. <br>
+        If it still does not work, try a different browser. <br>
+        Im very sorry.
+    </h1>
+
+    <div class="gameMainDiv">
+        <button onclick="nextImage()" style="width: 10vw; height:10vh; float:left"></button>
+        <div class="gameImageDiv">
+            <img src="img\DefaultImage.png" id="gameImage" class="gameImage" alt="">
+            <img onclick="clickHotspotImage(event);" src="game\maps\Pearl\map.png" class="mapImage" alt="">
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

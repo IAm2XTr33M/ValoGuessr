@@ -1,17 +1,7 @@
-const firebaseConfig = {
-    apiKey: "AIzaSyDeOILBmQ3x98YR3-tld8ArBV70_UFsEzM",
-    authDomain: "valoguessr.firebaseapp.com",
-    projectId: "valoguessr",
-    storageBucket: "valoguessr.appspot.com",
-    messagingSenderId: "340786735832",
-    appId: "1:340786735832:web:fdddad739837c5603705ad",
-    measurementId: "G-ZZJ2RGSJQG"
-  };
-
-
-
 const Difficulties = ["Easy","Mid","Hard","Impossible","Random"];
 let CurrentDif = 0;
+
+const devMode = false;
 
 function changeDif(){
     CurrentDif ++;
@@ -197,8 +187,8 @@ function StartGame(){
 ["Bind","Breeze","Haven","IceBox","Split","Pearl","Fracture","Ascent"];
 [false,false,false,false,false,false,false,false];
 
-const CurrentGuess = [0,0];
-const hasAns = false;
+var CurrentGuess = [0,0];
+var hasAns = false;
 
 
 
@@ -272,6 +262,12 @@ function GetLevels(){
 
     var usedLevels = [];
 
+    var KnowsMap = true;
+    if(sessionKnowMap == 0){
+        document.getElementById("selectmapid").style.display = 'block'
+        KnowsMap = false;
+    }
+
     addLevel();
 
     function addLevel(){
@@ -285,7 +281,7 @@ function GetLevels(){
     }
 
     //Current Round
-    var CR = 0;
+    var CR = 1;
 
     startRound();
 
@@ -293,9 +289,21 @@ function GetLevels(){
         var LevelMap = usedLevels[CR][4];
         var LevelImg = usedLevels[CR][0];
 
-        var dir = "game/maps/"+LevelMap+"/" + LevelImg + ".png";
+        var Imgdir = "game/maps/"+LevelMap+"/" + LevelImg + ".png";
 
-        document.getElementById('gameImage').src= dir; 
+        var roundText = "Round: " + CR.toString() + "/" + levelAmmount.toString();
+        document.getElementById("roundText").innerHTML = roundText;
+
+        if(KnowsMap){
+            var MapDir = "game/maps/"+LevelMap+"/map.png";
+        }
+        else{
+            console.log("test");
+            var MapDir = "game/maps/NoMap/map.png";
+        }
+
+        document.getElementById('gameImage').src= Imgdir; 
+        document.getElementById('mapImage').src= MapDir; 
 
         checkAns();
         function checkAns() {
@@ -313,9 +321,26 @@ function GetLevels(){
     console.log(usedLevels);
 }
 
+function ChooseMap(index){
+    var map = "";
+    switch (index) {
+        case 0: map="Bind"; break;
+        case 1: map="Breeze"; break;
+        case 2: map="Haven"; break;
+        case 3: map="IceBox"; break;
+        case 4: map="Split"; break;
+        case 5: map="Pearl"; break;
+        case 6: map="Fracture"; break;
+        case 7: map="Ascent"; break;
+        default: map="NoMap";
+            break;
+    }
+    var MapDir = "game/maps/"+map+"/map.png";
+    document.getElementById('mapImage').src= MapDir; 
+}
 
 
-const devMode = true;
+
 
 function clickHotspotImage(event) {
     var xCoordinate = event.offsetX;
@@ -329,7 +354,10 @@ function clickHotspotImage(event) {
         dummy.select();
         document.execCommand("copy");
         document.body.removeChild(dummy);
-        alert(text);
+    }
+    else{
+        CurrentGuess = [xCoordinate,yCoordinate];
+        console.log(CurrentGuess);
     }
 }
 document.onkeydown = checkKey;
@@ -348,15 +376,15 @@ function checkKey(e) {
 let Currentimg = 0;
 function nextImage(){
     Currentimg = Currentimg + 1;
-    var dir = "game/maps/IceBox/locations/" + Currentimg + ".png";
+    var dir = "game/maps/Haven/locations/" + Currentimg + ".png";
     console.log(dir)
-    document.getElementById('gameImage').src= dir; 
+    document.getElementById('mapImage').src= dir; 
 }
 function previousImage(){
     Currentimg = Currentimg - 1;
-    var dir = "game/maps/IceBox/locations/" + Currentimg + ".png";
+    var dir = "game/maps/Haven/locations/" + Currentimg + ".png";
     console.log(dir)
-    document.getElementById('gameImage').src= dir; 
+    document.getElementById('mapImage').src= dir; 
 }
 
 //DONT EVER REMOVE THIS NO MATTER WHAT YOU DO
@@ -366,10 +394,136 @@ const bindLevels = [
 
 ];
 const breezeLevels = [
-
+    [1 , 5,  true,   [] , ""],
+    [2 , 5,  true,   [] , ""],
+    [3 , 5,  true,   [] , ""],
+    [4 , 5,  true,   [] , ""],
+    [5 , 5,  true,   [] , ""],
+    [6 , 5,  true,   [] , ""],
+    [7 , 5,  true,   [] , ""],
+    [8 , 5,  true,   [] , ""],
+    [9 , 5,  true,   [] , ""],
+    [10, 5,  true,   [] , ""],
+    [11, 5,  true,   [] , ""],
+    [12, 5,  true,   [] , ""],
+    [13, 5,  true,   [] , ""],
+    [14, 5,  true,   [] , ""],
+    [15, 5,  true,   [] , ""],
+    [16, 5,  true,   [] , ""],
+    [17, 5,  true,   [] , ""],
+    [18, 5,  true,   [] , ""],
+    [19, 5,  true,   [] , ""],
+    [20, 5,  true,   [] , ""],
+    [21, 5,  true,   [] , ""],
+    [22, 5,  true,   [] , ""],
+    [23, 5,  true,   [] , ""],
+    [24, 5,  true,   [] , ""],
+    [25, 5,  true,   [] , ""],
+    [26, 5,  true,   [] , ""],
+    [27, 5,  true,   [] , ""],
+    [28, 5,  true,   [] , ""],
+    [29, 5,  true,   [] , ""],
+    [30, 5,  true,   [] , ""],
+    [31, 5,  true,   [] , ""],
+    [32, 5,  true,   [] , ""],
+    [33, 5,  true,   [] , ""],
+    [34, 5,  true,   [] , ""],
+    [35, 5,  true,   [] , ""],
+    [36, 5,  true,   [] , ""],
+    [37, 5,  true,   [] , ""],
+    [38, 5,  true,   [] , ""],
+    [39, 5,  true,   [] , ""],
+    [40, 5,  true,   [] , ""],
+    [41, 5,  true,   [] , ""],
+    [42, 5,  true,   [] , ""],
+    [43, 5,  true,   [] , ""],
+    [44, 5,  true,   [] , ""],
+    [45, 5,  true,   [] , ""],
+    [46, 5,  true,   [] , ""],
+    [47, 5,  true,   [] , ""],
+    [48, 5,  true,   [] , ""],
+    [49, 5,  true,   [] , ""],
+    [50, 5,  true,   [] , ""],
+    [51, 5,  true,   [] , ""],
+    [52, 5,  true,   [] , ""],
+    [53, 5,  true,   [] , ""],
+    [54, 5,  true,   [] , ""],
+    [55, 5,  true,   [] , ""],
+    [56, 5,  true,   [] , ""],
+    [57, 5,  true,   [] , ""],
+    [58, 5,  true,   [] , ""],
+    [59, 5,  true,   [] , ""],
+    [60, 5,  true,   [] , ""],
+    [61, 5,  true,   [] , ""],
+    [62, 5,  true,   [] , ""],
+    [63, 5,  true,   [] , ""],
 ];
 const havenLevels = [
-
+    [1 , 5,  true,   [481,386] , "haven"],
+    [2 , 6,  true,   [479,371] , "haven"],
+    [3 , 5,  true,   [465,387] , "haven"],
+    [4 , 6,  true,   [458,381] , "haven"],
+    [5 , 8,  true,   [440,445] , "haven"],
+    [6 , 5,  true,   [456,448] , "haven"],
+    [7 , 7,  true,   [502,471] , "haven"],
+    [8 , 4,  true,   [542,486] , "haven"],
+    [9 , 6,  true,   [524,404] , "haven"],
+    [10, 5,  true,   [562,400] , "haven"],
+    [11, 5,  true,   [595,392] , "haven"],
+    [12, 6,  true,   [608,437] , "haven"],
+    [13, 7,  true,   [607,456] , "haven"],
+    [14, 4,  true,   [600,327] , "haven"],
+    [15, 8,  true,   [625,285] , "haven"],
+    [16, 4,  true,   [672,305] , "haven"],
+    [17, 6,  true,   [662,338] , "haven"],
+    [18, 7,  true,   [666,341] , "haven"],
+    [19, 6,  true,   [664,383] , "haven"],
+    [20, 9,  true,   [665,365] , "haven"],
+    [21, 5,  true,   [655,376] , "haven"],
+    [22, 6,  true,   [637,300] , "haven"],
+    [23, 6,  true,   [565,267] , "haven"],
+    [24, 7,  true,   [566,301] , "haven"],
+    [25, 4,  true,   [560,304] , "haven"],
+    [26, 9,  true,   [513,286] , "haven"],
+    [27, 7,  true,   [527,323] , "haven"],
+    [28, 7,  true,   [495,309] , "haven"],
+    [29, 3,  true,   [448,333] , "haven"],
+    [30, 2,  true,   [432,344] , "haven"],
+    [31, 3,  true,   [564,539] , "haven"],
+    [32, 8,  true,   [543,534] , "haven"],
+    [33, 7,  true,   [585,513] , "haven"],
+    [34, 6,  true,   [607,522] , "haven"],
+    [35, 8,  true,   [655,414] , "haven"],
+    [36, 4,  true,   [761,377] , "haven"],
+    [37, 5,  true,   [595,407] , "haven"],
+    [38, 5,  true,   [646,279] , "haven"],
+    [39, 1,  true,   [632,185] , "haven"],
+    [40, 7,  true,   [622,152] , "haven"],
+    [41, 5,  true,   [605,156] , "haven"],
+    [42, 3,  true,   [700,243] , "haven"],
+    [43, 5,  true,   [761,265] , "haven"],
+    [44, 7,  true,   [733,280] , "haven"],
+    [45, 5,  true,   [742,262] , "haven"],
+    [46, 3,  true,   [719,418] , "haven"],
+    [47, 4,  true,   [716,374] , "haven"],
+    [48, 3,  true,   [742,391] , "haven"],
+    [49, 8,  true,   [758,428] , "haven"],
+    [50, 5,  true,   [701,455] , "haven"],
+    [51, 8,  false,   [435,438] , "haven"],
+    [52, 7,  false,   [715,313] , "haven"],
+    [53, 6,  false,   [578,436] , "haven"],
+    [54, 5,  true,   [558,372] , "haven"],
+    [55, 8,  true,   [554,369] , "haven"],
+    [56, 6,  true,   [560,344] , "haven"],
+    [57, 8,  true,   [555,300] , "haven"],
+    [58, 7,  false,   [462,308] , "haven"],
+    [59, 6,  false,   [572,274] , "haven"],
+    [60, 6,  true,   [738,315] , "haven"],
+    [61, 5,  true,   [731,399] , "haven"],
+    [62, 6,  true,   [664,399] , "haven"],
+    [63, 4,  true,   [593,280] , "haven"],
+    [64, 6,  true,   [661,419] , "haven"],
+    [65, 4,  true,   [748,399] , "haven"]
 ];
 const iceBoxLevels = [
     [1, 4,  true,   [539,512] , "icebox"],

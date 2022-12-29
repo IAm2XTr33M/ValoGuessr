@@ -1,0 +1,182 @@
+:root {
+    --Header:#0f0a0a;
+    --Light:#EBE7E7;
+    --Red: #CC3031;
+    overflow-x: hidden;
+}
+
+@font-face {
+    font-family: Leela;
+    src: url(../Fonts/LeelaUIb.ttf);
+    font-weight: bold;
+    font-style: normal;
+}
+
+body{
+    background-color: #EBE7E7;
+    background-image: radial-gradient(#cc303084 2px, #ebe7e700 2px);
+    background-size: 85px 85px;
+}
+
+button{
+    cursor: pointer;
+}
+
+.leela{
+    font-family: "Leela", sans-serif;
+}
+
+h1{
+    font-size: 5vh;
+    color: var(--Red);
+    text-shadow: 3px 2px 0px var(--Light), 8px 7px 0px rgba(15, 10, 10,0.15);
+}
+
+.header{
+    height: 120px;
+    width: 100vw;
+    background-color: var(--Header);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(15, 10, 10, 0.10) 0px 20px 21px;
+    z-index: 10;
+}
+
+.headerLogo{
+    height: 60%;
+    transition-duration: 300ms;
+}
+
+.header:hover .headerLogo{
+    height: 62%;
+    transition-duration: 300ms;
+}
+
+.mainDiv{
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.flex{
+    display: flex;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.settingsDiv{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.defaultP{
+    font-size: 200%;
+    font-size: 4vh;
+    color: var(--Header);
+    text-align: center;
+    text-shadow: 3px 2px 0px var(--Light), 8px 7px 0px rgba(15, 10, 10,0.15);
+}
+.button{
+    margin-top: -1vh;
+    background-color: var(--Light);
+    border-color: var(--Header);
+    color: var(--Red);
+    height: 10vh;
+    border-radius: 10px;
+    transition-duration: 100ms;
+}
+
+.button:hover{
+    background-color: var(--Red);
+    color: var(--Light);
+}
+.button-active{
+    background-color: var(--Red);
+    color: var(--Light);
+}
+.button-active:hover{
+    background-color: var(--Header);
+    color: var(--Red);
+}
+
+.buttonText{
+    font-size: 4vh;
+    line-height: 0;
+    margin-top: 3vh;
+    text-shadow: 3px 2px 0px var(--Light), 8px 7px 0px rgba(15, 10, 10,0.15);
+    transition-duration: 50ms;
+}
+.button:hover .buttonText{
+    text-shadow: 3px 2px 0px var(--Header), 8px 7px 0px rgba(15, 10, 10,0.15);
+    transition-duration: 50ms;
+}
+.button-active .buttonText{
+    text-shadow: 3px 2px 0px var(--Header), 8px 7px 0px rgba(15, 10, 10,0.15);
+    transition-duration: 50ms;
+}
+.button-active:hover .buttonText{
+    text-shadow: 3px 2px 0px var(--Light), 8px 7px 0px rgba(15, 10, 10,0.15);
+    transition-duration: 50ms;
+}
+
+.socialImg{
+    width: 10vh;
+    margin-left: 5vw;
+    border-radius: 10px;
+    box-shadow: rgba(15, 10, 10, 0.20) 0px 20px 21px;
+}
+
+.socialImg:hover{
+    box-shadow: rgba(15, 10, 10, 0.30) 0px 20px 21px;
+    margin-bottom: -2vh;
+    transition-duration: 200ms;
+}
+
+.gameMainDiv{
+    width: 90%;
+    height: calc(100vh - 120px);
+}
+
+.gameImageDiv{
+    width: 852px;
+    height: 480px;
+    float: right;
+    margin-top: calc((100vh - 120px - 480px) / 2);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    transition-duration: 50ms;
+
+}
+.gameImageDiv:hover{
+    width: 1280px;
+    height: 720px;
+    margin-top: calc((100vh - 120px - 720px) / 2);
+    transition-duration: 100ms;
+}
+
+.gameImage{
+    width: 100%;
+    height: 100%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.mapImage{
+    display : flex; 
+    width: 100%;
+    height: 100%;
+    opacity: 0%;
+    margin-top: -480px;
+
+}
+
+.gameImageDiv:hover .mapImage{
+    margin-top: -724px;
+    opacity: 100%;
+    transition-duration: 200ms;
+}

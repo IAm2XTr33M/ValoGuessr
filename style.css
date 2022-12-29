@@ -140,6 +140,10 @@ h1{
 }
 
 .gameMainDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10%;
     width: 90%;
     height: calc(100vh - 120px);
 }
@@ -147,17 +151,20 @@ h1{
 .gameImageDiv{
     width: 852px;
     height: 480px;
-    float: right;
     margin-top: calc((100vh - 120px - 480px) / 2);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     transition-duration: 50ms;
-
+    text-align: center;
 }
 .gameImageDiv:hover{
     width: 1280px;
     height: 720px;
     margin-top: calc((100vh - 120px - 720px) / 2);
     transition-duration: 100ms;
+}
+
+.gameImageDiv:hover .hoverText{
+    opacity: 0%;
 }
 
 .gameImage{
@@ -172,11 +179,69 @@ h1{
     height: 100%;
     opacity: 0%;
     margin-top: -480px;
-
 }
 
 .gameImageDiv:hover .mapImage{
     margin-top: -724px;
     opacity: 100%;
     transition-duration: 200ms;
+}
+
+.gameButtonsDiv{
+    height: 80%;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 5%;
+    width: 20%;
+    text-align: center;
+}
+
+.mapSelectDiv{
+    width: 50%;
+    height: 75px;
+    background-color: red;
+}
+
+.selectMapDiv{
+    position: absolute;
+    width: 15%;
+    background-color: var(--Light);
+    border: var(--Header) solid ;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition-duration: 200ms;
+}
+.selectMapDiv:hover{
+    background-color: var(--Red);
+    transition-duration: 200ms;
+    border-radius: 10px;
+}
+.selectMapButton{
+    float: left;
+    background-color: var(--Red);
+    width: 50%;
+    height: 60px;
+    display: none;
+    border: 0;
+    border-top: var(--Header) solid;
+    font-size: 3vh;
+    line-height: 0;
+    color: white;
+    text-shadow: 3px 2px 0px var(--Header), 8px 7px 0px rgba(15, 10, 10,0.15);
+    transition-duration: 200ms;
+}
+
+.selectMapDiv:hover .selectMapButton{
+    display:block;
+}
+.selectMapButton:hover{
+    background-color: white;
+    color: black;
+    text-shadow: 3px 2px 0px var(--Light), 8px 7px 0px rgba(15, 10, 10,0.15);
+}
+
+
+.selectMapDiv:hover .buttonText{
+    color: white;
+    text-shadow: 3px 2px 0px var(--Header), 8px 7px 0px rgba(15, 10, 10,0.15);
+    transition-duration: 50ms;
 }
