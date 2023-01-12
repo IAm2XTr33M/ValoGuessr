@@ -181,6 +181,16 @@ h1{
     margin-top: -480px;
 }
 
+.selectedImage{
+    position: relative;
+    opacity: 0%;
+    float: left;
+}
+
+.gameImageDiv:hover .selectedImage{
+    opacity: 100%;
+}
+
 .gameImageDiv:hover .mapImage{
     margin-top: -724px;
     opacity: 100%;
@@ -188,11 +198,35 @@ h1{
 }
 
 .gameButtonsDiv{
+    display: grid;
+    justify-content: center;
     height: 80%;
     background-color: rgba(0, 0, 0, 0);
     margin-top: 5%;
     width: 20%;
     text-align: center;
+}
+
+.GuessButton{
+    margin-top: 6%;
+    position: absolute;
+    width: 15%;
+    height: 7%;
+    background-color: var(--Light);
+    font-size: 1.2vw;
+    border: var(--Header) solid ;
+    border-radius: 10px;
+    color: white;
+    text-shadow: 3px 2px 0px var(--Header), 8px 7px 0px rgba(15, 10, 10,0.15);
+}
+
+.GuessButtonSelected{
+    background-color: #CC3031;
+}
+
+.GuessButtonSelected:hover{
+    background-color: var(--Header);
+    transition-delay: 100ms;
 }
 
 .mapSelectDiv{
@@ -202,6 +236,7 @@ h1{
 }
 
 .selectMapDiv{
+    z-index: 2;
     position: absolute;
     width: 15%;
     background-color: var(--Light);
@@ -215,6 +250,7 @@ h1{
     transition-duration: 200ms;
     border-radius: 10px;
 }
+
 .selectMapButton{
     float: left;
     background-color: var(--Red);
@@ -239,9 +275,23 @@ h1{
     text-shadow: 3px 2px 0px var(--Light), 8px 7px 0px rgba(15, 10, 10,0.15);
 }
 
-
 .selectMapDiv:hover .buttonText{
     color: white;
     text-shadow: 3px 2px 0px var(--Header), 8px 7px 0px rgba(15, 10, 10,0.15);
     transition-duration: 50ms;
+}
+
+.ScoreMainDiv{
+    width: 80vw;
+    height: 80vh;
+    margin-left: 10vw;
+}
+
+.overlay{
+    z-index: 3;
+    background-color: var(--Header);
+    position: absolute;
+    width: 100vw;
+    height: calc(100vh - 120px);
+    pointer-events:none;
 }

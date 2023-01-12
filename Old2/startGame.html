@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="js\myscripts.js"></script>
+    <title>ValoGuessr</title>
+</head>
+<body style="margin: 0;">
+
+<div class="header">
+    <a href="index.html" class="headerLogo">
+        <img src="/img/ValoGuessrLogo.png" style="height: 100%;">
+    </a></div>
+
+<div class="mainDiv">
+
+    <h1 class="leela">Start A Game</h1>
+
+    <p class="leela defaultP" style="margin-top: -2vh;">
+        -Select Settings-
+    </p>
+
+    <button class="button" style="min-width: 11vw;" onclick="toggleSettings();">
+        <p class="leela buttonText">-Settings-</p>
+    </button>
+
+    <div style="height: 2vh;"></div>
+
+    <div class="settingsDiv" id="settings" style="margin-top: 3vh; display: none;">
+
+        <div class="flex">
+            <div class="center">
+                <p class="leela defaultP" style="margin-top: -2vh;">
+                    -pick a difficulty-
+                </p>
+            
+                <button class="button" style="min-width: 10vw;" onclick="changeDif();">
+                    <p class="leela buttonText" id="difficultyid">-Easy-</p>
+                </button>
+            </div>
+            <div style="width: 5vw;"></div>
+            <div  class="center">
+                <p class="leela defaultP" style="margin-top: -2vh;">
+                    -Round Amount-
+                </p>
+            
+                <button class="button" style="min-width: 10vw;" onclick="changeAmount();">
+                    <p class="leela buttonText" id="amountid">-1-</p>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex">
+            <div class="center">
+                <p class="leela defaultP">
+                    -Always know map-
+                </p>
+            
+                <button class="button" style="min-width: 10vw;" id="mapswitchid" onclick="mapHintSwitch();">
+                    <p class="leela buttonText" id="maphintid">-On-</p>
+                </button>
+            </div>
+            <div style="width: 5vw;"></div>
+            <div  class="center">
+                <p class="leela defaultP">
+                    -Allow Out Of Bounds-
+                </p>
+            
+                <button class="button" style="min-width: 10vw;" id="outofboundswitch" onclick="outOfBoundSwitch();">
+                    <p class="leela buttonText" id="outofboundid">-On-</p>
+                </button>
+            </div>
+        </div>
+    
+        <br>
+        <br>
+    
+        <p class="leela defaultP" style="margin-top: -2vh;">
+            -pick some maps-
+        </p>
+    
+        <div style="margin-left:-2vw;">
+            <button class="button" style="min-width: 11vw; margin-left:2vw;" id="0" onclick="pickMap(id);">
+                <p class="leela buttonText">-Bind-</p>
+            </button>
+    
+            <button class="button" style="min-width: 11vw; margin-left:2vw;" id="1" onclick="pickMap(id);">
+                <p class="leela buttonText">-Breeze-</p>
+            </button>
+    
+            <button class="button" style="min-width: 11vw; margin-left:2vw;" id="2" onclick="pickMap(id);">
+                <p class="leela buttonText">-Haven-</p>
+            </button>
+    
+            <button class="button" style="min-width: 11vw; margin-left:2vw;" id="3" onclick="pickMap(id);">
+                <p class="leela buttonText">-IceBox-</p>
+            </button>
+    
+            <br>
+            <br>
+    
+            <button class="button" style="min-width: 11vw; margin-left:2vw; margin-top: 1vh;" id="4" onclick="pickMap(id);">
+                <p class="leela buttonText">-Split-</p>
+            </button>
+    
+            <button class="button" style="min-width: 11vw; margin-left:2vw; margin-top: 1vh;" id="5" onclick="pickMap(id);">
+                <p class="leela buttonText">-Pearl-</p>
+            </button>
+    
+            <button class="button" style="min-width: 11vw; margin-left:2vw; margin-top: 1vh;" id="6" onclick="pickMap(id);">
+                <p class="leela buttonText">-Fracture-</p>
+            </button>
+    
+            <button class="button" style="min-width: 11vw; margin-left:2vw; margin-top: 1vh;" id="7" onclick="pickMap(id);">
+                <p class="leela buttonText">-Ascent-</p>
+            </button>
+        </div>
+
+    </div>
+
+    <div style="height: 2vh;"></div>
+
+    <h1 class="leela">Start The Game</h1>
+
+    <a href="game.html">
+        <button class="button" style="min-width: 11vw;" onclick="">
+            <p class="leela buttonText">-Start The Game-</p>
+        </button>
+    </a>
+    
+    <div style="height: 10vh;"></div>
+
+</div>
+
+</body>
+</html>

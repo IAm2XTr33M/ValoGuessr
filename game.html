@@ -8,13 +8,15 @@
     <script src="js\myscripts.js"></script>
     <title>ValoGuessr</title>
 </head>
-<body style="margin: 0; overflow-y: hidden;">
+<body style="margin: 0; overflow-y: hidden; overflow-x: hidden;">
 
 <div class="header">
     <a href="index.html" class="headerLogo">
         <img src="/img/ValoGuessrLogo.png" style="height: 100%;">
     </a>
 </div>
+
+<div class="overlay" id="overlay"  style="opacity: 100%;"></div>
 
 <div class="mainDiv">
 
@@ -26,8 +28,12 @@
 
     <div class="gameMainDiv">
         <div class="gameButtonsDiv">
-            <h1 class="leela" id="roundText">Round: 1/10</h1>
-            <div style="width: 100%; height: 80%;" class="center">
+            <div style="height: 5vh;">
+                <h1 class="leela" style="margin-top: 6vh;" id="roundText">Round: 1/10</h1>
+                <h1 class="leela" id="pointText" style="line-height: 75%;">Points: 0</h1>
+                <h1 class="leela" style="font-size: 200%;" id="pointsGained">Guess as close as possible!</h1>
+            </div>
+            <div style="width: 100%; margin-top: -5vh;" class="center">
                 <div class="selectMapDiv" id="selectmapid" style="display: none;">
                     <p class="leela buttonText">Select Map</p>
                     <button class="selectMapButton leela" onclick="ChooseMap(0);">Bind</button>
@@ -39,12 +45,15 @@
                     <button class="selectMapButton leela" onclick="ChooseMap(6);">Fracture</button>
                     <button class="selectMapButton leela" onclick="ChooseMap(7);" style="border-left: var(--Header) solid;border-left: var(--Header) solid;">Ascent</button>
                 </div>
+                <button class="GuessButton leela" id="submitButton" onclick="SubmitGuess()">Submit guess</button>
+                <button class="GuessButton leela" style="margin-top: 11.2%;" id="continueButton" onclick="Continue()">Continue.</button>
             </div>
         </div>
         <div class="gameImageDiv">
             <img src="img\DefaultImage.png" id="gameImage" class="gameImage" alt="">
-            <img onclick="clickHotspotImage(event);" id="mapImage" class="mapImage" alt="">
-            <h1 class="leela hoverText" style="font-size: 3vh; margin-top: 2%;">{Hover to select}</h1>
+            <img onclick="clickHotspotImage(event);" id="mapImage"  style="display: block;" class="mapImage" alt="">
+            <img src="img\Selected.png" id="selectImg" class="selectedImage" style="left: 500%; top: 0%;">
+            <h1 class="leela hoverText" style="font-size: 3vh; margin-top: 2%;">Hover to view selection - Left click to guess</h1>
         </div>
     </div>
 

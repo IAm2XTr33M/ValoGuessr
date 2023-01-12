@@ -91,8 +91,6 @@ function pickMap(id){
 }
 
 function toggleSettings(){
-    console.log("tests")
-
     var el = document.getElementById("settings");
     if(el.style.display != "none"){
         el.style.display = "none"
@@ -126,9 +124,13 @@ window.onload = function() {
     if ( document.URL.includes("startGame.html") ) {
         ResetGame();
     }
+    if ( document.URL.includes("ScoreScreen.html") ) {
+        ShowPoints();
+    }
 }
 function ResetGame(){
     if(typeof(sessionStorage) != 'undefined') {
+        sessionStorage.setItem("sessionMap", "1");
         sessionStorage.setItem("sessionDif", CurrentDif);
         sessionStorage.setItem("sessionMaps", JSON.stringify(CurrentMaps));
         sessionStorage.setItem("sessionOOB", 1);
@@ -188,7 +190,25 @@ function StartGame(){
 [false,false,false,false,false,false,false,false];
 
 var CurrentGuess = [0,0];
-var hasAns = false;
+var usedLevels = []
+//Current Round
+var CR = 0;;
+var CurrentPoints = 0;
+
+var KnowsMap = true;
+var HasPickedMap = false;
+
+var hasGuess = false;
+var hasSubmitted = false;
+var hasConfirmed = false;
+
+var LevelMap;
+var LevelImg;
+
+var imgWidth;
+var imgHeight;
+
+var pointsGain = 0;
 
 
 
@@ -260,9 +280,7 @@ function GetLevels(){
 
     var levelAmmount = sessionAmount;
 
-    var usedLevels = [];
 
-    var KnowsMap = true;
     if(sessionKnowMap == 0){
         document.getElementById("selectmapid").style.display = 'block'
         KnowsMap = false;
@@ -280,49 +298,73 @@ function GetLevels(){
         }
     }
 
-    //Current Round
-    var CR = 1;
-
     startRound();
 
-    function startRound(){
-        var LevelMap = usedLevels[CR][4];
-        var LevelImg = usedLevels[CR][0];
+    async function startRound(){
+        LevelMap = usedLevels[CR][4];
+        LevelImg = usedLevels[CR][0];
 
         var Imgdir = "game/maps/"+LevelMap+"/" + LevelImg + ".png";
 
-        var roundText = "Round: " + CR.toString() + "/" + levelAmmount.toString();
+        var roundText = "Round: " + (CR+1).toString() + "/" + levelAmmount.toString();
         document.getElementById("roundText").innerHTML = roundText;
 
         if(KnowsMap){
             var MapDir = "game/maps/"+LevelMap+"/map.png";
         }
         else{
-            console.log("test");
             var MapDir = "game/maps/NoMap/map.png";
         }
 
         document.getElementById('gameImage').src= Imgdir; 
         document.getElementById('mapImage').src= MapDir; 
 
+        for (let index = 0; index < 100; index++) {
+            document.getElementById("overlay").style.opacity = 100-index+"%";
+            await delay(5);
+        }
+        document.getElementById("overlay").style.display = "none";
+
         checkAns();
-        function checkAns() {
-            if(hasAns === false) {
+        async function checkAns() {
+            if(hasConfirmed === false) {
                window.setTimeout(checkAns, 100);
             } else {
-                if(CR <= levelAmmount){
-                    CR++;
+                CurrentPoints += pointsGain;
+                CurrentPoints = Math.round(CurrentPoints);
+ 
+                resetStuff();
+
+                CR++;
+
+                if(CR == levelAmmount){
+                    CR = 0;
+                    sessionStorage.setItem("LastPoints", JSON.stringify(CurrentPoints));
+                    document.location = "ScoreScreen.html";
+                }
+                else{
                     startRound();
                 }
             }
         }
     }
-
-    console.log(usedLevels);
 }
 
+function resetStuff(){
+    hasSubmitted = false;
+    hasConfirmed = false;
+    hasGuess = false;
+    HasPickedMap = false;
+    CurrentGuess = [0,0]; 
+    
+    document.getElementById("pointsGained").innerHTML = "Guess as close as possible!";
+    document.getElementById("pointText").innerHTML = "Points: " + CurrentPoints.toString();
+    document.getElementById("selectImg").style.left = "500%";
+}
+
+var map = "";
 function ChooseMap(index){
-    var map = "";
+    map = "";
     switch (index) {
         case 0: map="Bind"; break;
         case 1: map="Breeze"; break;
@@ -339,8 +381,75 @@ function ChooseMap(index){
     document.getElementById('mapImage').src= MapDir; 
 }
 
+async function Continue(){
+    if(hasSubmitted){
+        document.getElementById("overlay").style.display = "block";
+        for (let index = 0; index < 100; index++) {
+            document.getElementById("overlay").style.opacity = index+"%";
+            await delay(1);
+        }
+
+        document.getElementById("continueButton").classList.remove("GuessButtonSelected");
+        document.getElementById("mapImage").style.display = "block";
+
+        hasConfirmed = true;
+    }
+}
+
+function SubmitGuess(){
+    if(hasGuess){
+
+        document.getElementById("submitButton").classList.remove("GuessButtonSelected");
+        document.getElementById("submitButton").classList.remove("GuessButtonSelected");
+
+        document.getElementById("mapImage").style.display = "none";
+
+        var Imgdir = "game/maps/"+LevelMap+"/locations/" + LevelImg + ".png";
+
+        document.getElementById("gameImage").src = Imgdir;
 
 
+        pointsGain = 0;
+        var levelAns = [usedLevels[CR][3][0]/1222*100,usedLevels[CR][3][1]/720*100];
+        var difference = Math.abs(CurrentGuess[0]-levelAns[0])+Math.abs(CurrentGuess[1]-levelAns[1]);
+
+        if(KnowsMap){
+            if(difference<3){
+                pointsGain = 5000;
+            }
+            else{
+                pointsGain = 5000+500-(200*difference);
+            }
+            if(pointsGain < 0){
+                pointsGain = 0;
+            }
+            hasSubmitted = true;
+        }
+        else{
+            if(map.toUpperCase() == usedLevels[CR][4].toUpperCase()){
+                if(difference<3){
+                    pointsGain = 5000;
+                }
+                else{
+                    pointsGain = 5000+500-(200*difference);
+                }
+                if(pointsGain < 0){
+                    pointsGain = 0;
+                }
+                hasSubmitted = true;
+            }
+            else{
+                hasSubmitted = true;
+            }
+        }
+
+        document.getElementById("pointsGained").innerHTML = "You gained "+ Math.round(pointsGain).toString() +" points!" 
+    
+        document.getElementById("continueButton").classList.add("GuessButtonSelected");
+    }
+}
+
+//1222 720
 
 function clickHotspotImage(event) {
     var xCoordinate = event.offsetX;
@@ -357,9 +466,46 @@ function clickHotspotImage(event) {
     }
     else{
         CurrentGuess = [xCoordinate,yCoordinate];
-        console.log(CurrentGuess);
+
+        imgWidth = document.getElementById("gameImage").clientWidth;;
+        imgHeight = document.getElementById("gameImage").clientHeight;
+
+        CurrentGuess = [xCoordinate/imgWidth*100,yCoordinate/imgHeight*100]
+
+        var selectImgEl = document.getElementById("selectImg").style;
+        selectImgEl.left = imgWidth/100*CurrentGuess[0]-(5).toString()+"px";
+        selectImgEl.top = imgHeight/100*CurrentGuess[1]-(imgHeight+5).toString()+"px";
+
+        document.getElementById("submitButton").classList.add("GuessButtonSelected");
+
+        hasGuess = true;
     }
 }
+
+async function ShowPoints(){
+    var lastPoints;
+    if (sessionStorage.getItem("LastPoints")) {
+        lastPoints = JSON.parse(sessionStorage.getItem("LastPoints"));
+        document.getElementById("pointsText").innerHTML = getNumberWithCommas(lastPoints) + " points!"
+        for (let index = 0; index < 100; index++) {
+            document.getElementById("overlay").style.opacity = (100-index)+"%";
+            await delay(5);
+        }
+    }
+    else{
+        for (let index = 0; index < 100; index++) {
+            document.getElementById("overlay").style.opacity = (100-index)+"%";
+            await delay(5);
+        }
+        document.getElementById("pointsText").innerHTML = "0 points!"
+    }
+}
+
+function getNumberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+
 document.onkeydown = checkKey;
 function checkKey(e) {
     if(devMode){
@@ -377,15 +523,17 @@ let Currentimg = 0;
 function nextImage(){
     Currentimg = Currentimg + 1;
     var dir = "game/maps/Haven/locations/" + Currentimg + ".png";
-    console.log(dir)
     document.getElementById('mapImage').src= dir; 
 }
 function previousImage(){
     Currentimg = Currentimg - 1;
     var dir = "game/maps/Haven/locations/" + Currentimg + ".png";
-    console.log(dir)
     document.getElementById('mapImage').src= dir; 
 }
+
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  }
 
 //DONT EVER REMOVE THIS NO MATTER WHAT YOU DO
 //Scale 1/10 hardness - true false bounds
