@@ -754,7 +754,7 @@ const pearlLevels = [
     [17, 9,  false, [620,501] , "pearl"],
     [18, 7,  true,  [444,469] , "pearl"],
     [20, 6,  true,  [540,305] , "pearl"],
-    [19, 5,  true,  [718,329] , "pearl"],
+    [19, 5,  true,  [518,306] , "pearl"],
     [21, 9,  true,  [692,487] , "pearl"],
     [22, 6,  true,  [702,462] , "pearl"],
     [23, 5,  true,  [714,406] , "pearl"],
