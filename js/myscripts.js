@@ -522,12 +522,12 @@ function checkKey(e) {
 let Currentimg = 0;
 function nextImage(){
     Currentimg = Currentimg + 1;
-    var dir = "game/maps/Haven/locations/" + Currentimg + ".png";
+    var dir = "game/maps/pearl/locations/" + Currentimg + ".png";
     document.getElementById('mapImage').src= dir; 
 }
 function previousImage(){
     Currentimg = Currentimg - 1;
-    var dir = "game/maps/Haven/locations/" + Currentimg + ".png";
+    var dir = "game/maps/pearl/locations/" + Currentimg + ".png";
     document.getElementById('mapImage').src= dir; 
 }
 
@@ -749,14 +749,14 @@ const pearlLevels = [
     [14, 7,  false, [633,468] , "pearl"],
     [15, 7,  false, [670,502] , "pearl"],
     [16, 8,  false, [651,511] , "pearl"],
-    [17, 9,  false, [647,501] , "pearl"],
+    [17, 9,  false, [620,501] , "pearl"],
     [18, 7,  true,  [444,469] , "pearl"],
     [20, 6,  true,  [540,305] , "pearl"],
     [19, 5,  true,  [718,329] , "pearl"],
     [21, 9,  true,  [692,487] , "pearl"],
     [22, 6,  true,  [702,462] , "pearl"],
     [23, 5,  true,  [714,406] , "pearl"],
-    [24, 7,  true,  [704,274] , "pearl"],
+    [24, 7,  true,  [684,407] , "pearl"],
     [25, 10,  true, [703,274] , "pearl"],
     [26, 3,  true,  [641,366] , "pearl"],
     [27, 2,  true,  [735,357] , "pearl"],
