@@ -319,6 +319,8 @@ function GetLevels(){
         document.getElementById('gameImage').src= Imgdir; 
         document.getElementById('mapImage').src= MapDir; 
 
+        await delay(500);
+
         for (let index = 0; index < 100; index++) {
             document.getElementById("overlay").style.opacity = 100-index+"%";
             await delay(5);
